@@ -1,0 +1,38 @@
+.bookslist{
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    margin-top: 60px;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
+.row{
+    width: 80%;
+    border-bottom: 2px solid lightgrey;
+    text-align: left;
+    margin: auto;
+}
+.maindetails{
+    width: 80%;
+    margin: 5px;
+}
+
+.smalldetails, .links{
+    border-top: 1px solid grey;
+    padding: 10px;
+    width: inherit;
+    margin: 0px 5px 5px 5px;
+    color: #00635d;
+    font-size: 14px;
+}
+
+.readlink{
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #D6D0C4;
+    color: #333333;
+    background-color: #F4F1EA;
+    margin-right: 10px;
+}
