@@ -9,8 +9,8 @@
         <div class="links">
                 <p>ISBN: {{book.isbn}}</p>
             <a class="readlink" href="{{book.website}}">Read Here</a>
-            <button class="readlink">Mark as Read</button>
-            <button class="readlink">Want to Read</button>
+            <button class="readlink" (click)="markAsRead(book.isbn)">Mark as Read</button>
+            <button class="readlink" (click)="wantToRead(book.isbn)">Want to Read</button>
         </div>
         <div class="smalldetails">
             <p>Published {{book.published}}, by {{book.publisher}}</p>

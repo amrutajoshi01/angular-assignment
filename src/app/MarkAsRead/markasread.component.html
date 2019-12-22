@@ -1,0 +1,20 @@
+<div class="bookslist">
+    <div *ngFor="let book of booksList" class="row">
+        <div class="maindetails">
+            <h2 class="details">{{book.book.title}}</h2>
+            <h3 class="details">{{book.book.subtitle}}</h3>
+            <h4 class="details"> by {{book.book.author}}</h4>
+            <p class="details">{{book.book.description}}</p>
+        </div>
+        <div class="links">
+                <p>ISBN: {{book.book.isbn}}</p>
+            <a class="readlink" href="{{book.book.website}}">Read Here</a>
+            <!-- <button class="readlink" (click)="markAsRead(book.book.isbn)">Mark as Read</button>
+            <button class="readlink" (click)="wantToRead(book.book.isbn)">Want to Read</button> -->
+        </div>
+        <div class="smalldetails">
+            <p>Published {{book.book.published}}, by {{book.book.publisher}}</p>
+            <p>Ebook, {{book.book.pages}} pages</p>
+        </div>
+    </div>
+</div>
