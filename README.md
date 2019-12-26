@@ -2,26 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
 
-## Development server
+### Installation
+Navigate to the project directory and run `npm install`.
 
+### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Features
+1. There are 3 Items in the Navigation menu. "All Books", "Read" and "Want to Read".
+2. "All Books" displays list of all books from books.json file.
+   * Clicking "Want To Read" adds the book to "WantToReadBooks" array in reducer.
+   * Clicking "Mark as Read" adds the book to "ReadBooks" array in reducer and removes the book from "WantToReadBooks", if present.
+3. "Want To Read" displays list of all books from "WantToReadBooks" array in reducer.
+4. "Read" displays list of all books from "ReadBooks" array in reducer.
