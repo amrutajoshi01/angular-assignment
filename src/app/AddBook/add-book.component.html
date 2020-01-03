@@ -1,0 +1,12 @@
+<div class="add">
+    <input class="details" type="text" name="title" placeholder="title" [(ngModel)]="newBook.title">
+    <input class="details" type="text" name="subtitle" placeholder="subtitle" [(ngModel)]="newBook.subtitle">
+    <input class="details" type="text" name="author" placeholder="author" [(ngModel)]="newBook.author">
+    <input class="details" type="text" name="description" placeholder="description" [(ngModel)]="newBook.description">
+    <input class="details" type="text" name="isbn" placeholder="isbn" [(ngModel)]="newBook.isbn">
+    <input class="details" type="text" name="website" placeholder="website" [(ngModel)]="newBook.website">
+    <input class="details" type="date" name="published" placeholder="published" [(ngModel)]="newBook.published">
+    <input class="details" type="text" name="publisher" placeholder="publisher" [(ngModel)]="newBook.publisher">
+    <input class="details" type="text" name="pages" placeholder="pages" [(ngModel)]="newBook.pages">
+</div>
+<button (click)="addBook()">Add</button>

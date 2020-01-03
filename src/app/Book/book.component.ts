@@ -39,4 +39,8 @@ export class BookComponent {
   wantToRead(isbn: string) {
     this.store.dispatch(BooksActions.BeginWantToReadAction({ payload: isbn }))
   }
+
+  ngOnDestroy(){
+    this.BooksSubscription.unsubscribe();
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import booksData from "../../books.json";
-import markAsReadBooks from "../../markasread.json";
-import wantToReadBooks from "../../wanttoread.json";
+// import markAsReadBooks from "../../markasread.json";
+// import wantToReadBooks from "../../wanttoread.json";
 import { Book } from './book.js';
 
 @Injectable()
@@ -11,11 +11,17 @@ export class BooksService {
     WantToReadBooks: { book: Book, addedOn: Date }[];
     constructor() {
         this.Books = booksData;
-        this.MarkAsReadBooks = markAsReadBooks;
-        this.WantToReadBooks = wantToReadBooks;
+        this.MarkAsReadBooks = [];
+        this.WantToReadBooks = [];
     }
 
     getBooks() {
+        return this.Books;
+    }
+
+    addBook(book: Book) {
+        console.log(book)
+        this.Books = this.Books.concat(book);
         return this.Books;
     }
 
@@ -31,7 +37,6 @@ export class BooksService {
     }
 
     wantToRead(isbn: string) {
-        console.log("want to read (service)" + isbn);
         let isMarked = this.WantToReadBooks.find(book => book.book.isbn === isbn)
         let isRead = this.MarkAsReadBooks.find(book => book.book.isbn === isbn)
         if (!isMarked && !isRead) {

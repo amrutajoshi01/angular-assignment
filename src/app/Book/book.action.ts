@@ -14,3 +14,7 @@ export const BeginWantToReadAction = createAction("BeginWantToRead", props<{ pay
 
 export const SuccessWantToReadAction = createAction("SuccessWantToRead",
   props<{ payload: { book: Book, addedOn: Date }[] }>());
+
+export const BeginAddBookAction = createAction("BeginAddBook", props<{ payload: Book }>());
+
+export const SuccessAddBookAction = createAction("SuccessAddBook", props<{ payload: Book[] }>());

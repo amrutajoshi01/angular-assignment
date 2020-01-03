@@ -1,0 +1,12 @@
+.operations {
+  margin: auto;
+  margin-top: 60px;
+  display: table;
+}
+.row {
+  display: table-row;
+}
+
+.details {
+  display: table-cell;
+}

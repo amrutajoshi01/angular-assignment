@@ -20,6 +20,14 @@ export class BooksEffects {
         )
     );
 
+    AddBook$: Observable<Action> = createEffect(() =>
+        this.action$.pipe(
+            ofType(BooksActions.BeginAddBookAction),
+            map((payload) => this.booksService.addBook(payload.payload)),
+            map((payload) => BooksActions.SuccessAddBookAction({ payload }))
+        )
+    );
+
     MarkAsRead$: Observable<Action> = createEffect(() =>
         this.action$.pipe(
             ofType(BooksActions.BeginMarkAsReadAction),

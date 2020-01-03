@@ -1,0 +1,7 @@
+.details{
+  display: table-cell;
+}
+
+.add{
+  display: table-row;
+}

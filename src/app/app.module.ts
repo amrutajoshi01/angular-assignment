@@ -13,6 +13,9 @@ import { BooksEffects } from './Book/book.effect';
 import { BooksService } from './Book/book.service';
 import { WantToReadComponent } from './WantToRead/wanttoread.component';
 import { MarkAsReadComponent } from './MarkAsRead/markasread.component';
+import { BookOperationsComponent } from './BookOperations/book-operations.component';
+import { EditComponent } from './Edit/edit.component';
+import { AddBookComponent } from './AddBook/add-book.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { MarkAsReadComponent } from './MarkAsRead/markasread.component';
     BookComponent,
     MenuComponent,
     WantToReadComponent,
-    MarkAsReadComponent
+    MarkAsReadComponent,
+    BookOperationsComponent,
+    EditComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,

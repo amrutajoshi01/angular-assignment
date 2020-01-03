@@ -33,7 +33,16 @@ const booksReducer = createReducer(
   }),
   on(BooksActions.SuccessWantToReadAction, (state: any, { payload }) => {
     return { ...state, WantToReadBooks: payload, Books: state.Books };
+  }),
+
+  on(BooksActions.BeginAddBookAction, (state: any) => {
+    return state;
+  }),
+  on(BooksActions.SuccessAddBookAction, (state: any, { payload }) => {
+    console.log(payload)
+    return { ...state, Books: payload };
   })
+
 );
 
 export function reducer(state: BooksState | undefined, action: Action) {
