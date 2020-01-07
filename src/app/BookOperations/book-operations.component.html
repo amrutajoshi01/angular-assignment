@@ -1,4 +1,6 @@
-<edit *ngIf="loaded" (close)="closeEdit()" [editBook]="editBook"></edit>
+<edit *ngIf="loadEdit" (close)="closeEdit($event)" [editBook]="editBook"></edit>
+<button class="add" (click) = "openAdd()">Add Book</button>
+<add-book *ngIf="loadAdd" (add)="addBook($event)"></add-book>
 <div class="operations">
     <div *ngFor="let book of booksList" class="row">
         <p class="details">{{book.title}}</p>
@@ -11,9 +13,8 @@
         <p class="details"s>{{book.pages}} pages</p>
         <div class="links">
             <button (click) = "openEdit(book)" >Edit</button>
-            <button >Delete</button>
+            <button (click) = "deleteBook(book.isbn)">Delete</button>
         </div>
     </div>
 </div>
-<button >Add Book</button>
-<add-book *ngIf="loaded" (add)="addBook($event)"></add-book>
+

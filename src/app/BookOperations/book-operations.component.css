@@ -3,6 +3,10 @@
   margin-top: 60px;
   display: table;
 }
+.add{
+  margin-top: 60px;
+}
+
 .row {
   display: table-row;
 }

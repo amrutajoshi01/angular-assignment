@@ -11,6 +11,8 @@ import * as BooksActions from "../Book/book.action";
   styleUrls: ["./book-operations.component.css"]
 })
 export class BookOperationsComponent implements OnInit {
+  @Output() editBook: Book;
+
   constructor(public store: Store<BooksState>) {
     this.books$ = store.pipe(select("books"));
   }
@@ -18,8 +20,9 @@ export class BookOperationsComponent implements OnInit {
   books$: Observable<BooksState>;
   BooksSubscription: Subscription;
   booksList: Book[];
-  loaded = false;
-  @Output() editbook: Book;
+  loadEdit = false;
+  loadAdd = false;
+
   ngOnInit() {
     this.BooksSubscription = this.books$
       .pipe(
@@ -31,18 +34,29 @@ export class BookOperationsComponent implements OnInit {
     this.store.dispatch(BooksActions.BeginGetBooksAction());
   }
 
-  addBook($event) {
-    this.store.dispatch(BooksActions.BeginAddBookAction($event));
+  addBook(book:Book) {
+    this.store.dispatch(BooksActions.BeginAddBookAction({payload: book}));
+    this.loadAdd = false;
   }
 
   openEdit(book: Book) {
-    this.editbook = book;
-    this.loaded = true;
+    this.store.dispatch(BooksActions.BeginEditBookAction({payload: book}));
+    this.loadEdit = true;
   }
 
-  closeEdit() {
-    this.loaded = false;
+  closeEdit(book: Book) {
+    this.store.dispatch(BooksActions.BeginEditBookAction({payload: book}));
+    this.loadEdit = false;
   }
+
+  openAdd(book: Book) {
+    this.loadAdd = true;
+  }
+
+  deleteBook(isbn: string) {
+    this.store.dispatch(BooksActions.BeginDeleteBookAction({payload: isbn}));
+  }
+
   ngOnDestroy() {
     this.BooksSubscription.unsubscribe();
   }

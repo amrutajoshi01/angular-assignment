@@ -1,2 +1,14 @@
-<div class="edit"><p>edit works!</p></div>
-<button (click) = "closeEdit()" >Close</button>
+<div class="edit">
+    <h4>Edit Book</h4>
+    <input class="details" type="text" name="title" [(ngModel)]="editBook.title">
+    <input class="details" type="text" name="subtitle" [(ngModel)]="editBook.subtitle">
+    <input class="details" type="text" name="author" [(ngModel)]="editBook.author">
+    <input class="details" type="text" name="description" placeholder="description" [(ngModel)]="editBook.description">
+    <input class="details" type="text" name="isbn" [(ngModel)]="editBook.isbn">
+    <input class="details" type="text" name="website" [(ngModel)]="editBook.website">
+    <input class="details" type="date" name="published" [(ngModel)]="editBook.published">
+    <input class="details" type="text" name="publisher" [(ngModel)]="editBook.publisher">
+    <input class="details" type="text" name="pages" [(ngModel)]="editBook.pages">
+</div>
+<button (click)="closeEdit()">Submit</button>
+<br/>

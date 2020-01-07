@@ -28,6 +28,22 @@ export class BooksEffects {
         )
     );
 
+    EditBook$: Observable<Action> = createEffect(() =>
+        this.action$.pipe(
+            ofType(BooksActions.BeginEditBookAction),
+            map((payload) => this.booksService.editBook(payload.payload)),
+            map((payload) => BooksActions.SuccessEditBookAction({ payload }))
+        )
+    );
+
+    DeleteBook$: Observable<Action> = createEffect(() =>
+        this.action$.pipe(
+            ofType(BooksActions.BeginDeleteBookAction),
+            map((payload) => this.booksService.deleteBook(payload.payload)),
+            map((payload) => BooksActions.SuccessEditBookAction({ payload }))
+        )
+    );
+
     MarkAsRead$: Observable<Action> = createEffect(() =>
         this.action$.pipe(
             ofType(BooksActions.BeginMarkAsReadAction),

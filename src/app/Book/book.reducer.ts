@@ -4,14 +4,16 @@ import { Book } from "./book";
 
 export interface BooksState {
   Books: Book[];
-  ReadBooks: { book: Book, addedOn: Date }[];
-  WantToReadBooks: { book: Book, addedOn: Date }[];
+  ReadBooks: { book: Book; addedOn: Date }[];
+  WantToReadBooks: { book: Book; addedOn: Date }[];
+  editBook: Book;
 }
 
 const initialState: BooksState = {
   Books: [],
   ReadBooks: [],
-  WantToReadBooks: []
+  WantToReadBooks: [],
+  editBook: new Book()
 };
 
 const booksReducer = createReducer(
@@ -39,10 +41,22 @@ const booksReducer = createReducer(
     return state;
   }),
   on(BooksActions.SuccessAddBookAction, (state: any, { payload }) => {
-    console.log(payload)
+    return { ...state, Books: payload };
+  }),
+
+  on(BooksActions.BeginEditBookAction, (state: any, { payload }) => {
+    return { ...state, editBook: payload };
+  }),
+  on(BooksActions.SuccessEditBookAction, (state: any, { payload }) => {
+    return { ...state, Books: payload };
+  }),
+
+  on(BooksActions.BeginDeleteBookAction, (state: any, { payload }) => {
+    return { ...state, editBook: payload };
+  }),
+  on(BooksActions.SuccessDeleteBookAction, (state: any, { payload }) => {
     return { ...state, Books: payload };
   })
-
 );
 
 export function reducer(state: BooksState | undefined, action: Action) {
