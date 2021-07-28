@@ -16,6 +16,7 @@ import { MarkAsReadComponent } from './MarkAsRead/markasread.component';
 import { BookOperationsComponent } from './BookOperations/book-operations.component';
 import { EditComponent } from './Edit/edit.component';
 import { AddBookComponent } from './AddBook/add-book.component';
+import { BookContainerComponent } from './Book/containers/book.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddBookComponent } from './AddBook/add-book.component';
     MarkAsReadComponent,
     BookOperationsComponent,
     EditComponent,
-    AddBookComponent
+    AddBookComponent,
+    BookContainerComponent
   ],
   imports: [
     BrowserModule,

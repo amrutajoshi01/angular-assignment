@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
+import { Component, OnInit, EventEmitter, Input, Output, ChangeDetectorRef } from "@angular/core";
 import { Book } from "../Book/book";
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subject, Subscription } from "rxjs";
 import { BooksState } from "app/Book/book.reducer";
-import { map } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 @Component({
   selector: "edit",
@@ -12,11 +12,13 @@ import { select, Store } from "@ngrx/store";
 export class EditComponent implements OnInit {
   @Input() editBook: Book;
   @Output() close = new EventEmitter();
-  books$: Observable<BooksState>;
-  BooksSubscription: Subscription;
-
-  constructor(public store: Store<BooksState>) {
-    this.books$ = store.pipe(select("books"));
+  destroyStore$ = new Subject();
+  constructor(public store: Store<BooksState>,
+    private cd: ChangeDetectorRef,) {
+    store.pipe(takeUntil(this.destroyStore$)).subscribe(state => {
+      this.editBook = state.editBook;
+      cd.markForCheck();
+    });
   }
 
   closeEdit() {
@@ -24,12 +26,9 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.BooksSubscription = this.books$
-      .pipe(
-        map(x => {
-          this.editBook = x.editBook;
-        })
-      )
-      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroyStore$.next();
   }
 }

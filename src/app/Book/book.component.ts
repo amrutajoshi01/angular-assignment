@@ -1,46 +1,44 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, ChangeDetectionStrategy } from "@angular/core";
 import { Book } from "./book";
 import { BooksState } from './book.reducer';
 import { Store, select } from '@ngrx/store'
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import * as BooksActions from './book.action'
+import { Subject } from 'rxjs';
 
 @Component({
   selector: "book",
   templateUrl: "./book.component.html",
-  styleUrls: ["./book.component.css"]
+  styleUrls: ["./book.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookComponent {
-
-  constructor(public store: Store<BooksState>) {
-    this.books$ = store.pipe(select('books'));
+export class BookComponent implements OnChanges {
+  destroyStore$ = new Subject();
+  @Input() booksList: Book[];
+  @Output() markRead = new EventEmitter();
+  @Output() toRead = new EventEmitter();
+  constructor(public store: Store<BooksState>,
+    private cd: ChangeDetectorRef,) {
   }
 
-  books$: Observable<BooksState>;
-  BooksSubscription: Subscription;
-  booksList: Book[];
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('booksList', this.booksList);
+  }
+
 
   ngOnInit() {
-    this.BooksSubscription = this.books$
-      .pipe(
-        map(x => {
-          this.booksList = x.Books;
-        })
-      )
-      .subscribe();
     this.store.dispatch(BooksActions.BeginGetBooksAction())
   }
-
+  
   markAsRead(isbn: string) {
-    this.store.dispatch(BooksActions.BeginMarkAsReadAction({ payload: isbn }))
+    this.markRead.emit(isbn);
   }
 
   wantToRead(isbn: string) {
-    this.store.dispatch(BooksActions.BeginWantToReadAction({ payload: isbn }))
+    this.toRead.emit(isbn);
   }
 
-  ngOnDestroy(){
-    this.BooksSubscription.unsubscribe();
+  ngOnDestroy() {
+    this.destroyStore$.next();
   }
 }

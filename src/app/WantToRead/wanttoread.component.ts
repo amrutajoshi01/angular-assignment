@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Book } from "../Book/book";
 import { BooksState } from '../Book/book.reducer';
 import { Store, select } from '@ngrx/store'
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import * as BooksActions from '../Book/book.action'
 
 @Component({
@@ -12,22 +12,22 @@ import * as BooksActions from '../Book/book.action'
   styleUrls: ["./wanttoread.component.css"]
 })
 export class WantToReadComponent {
+  books$: Observable<BooksState>;
+  booksList: { book: Book, addedOn: Date }[];
+  destroyStore$ = new Subject();
 
-  constructor(public store: Store<BooksState>) {
-    this.books$ = store.pipe(select('books'));
+  constructor(public store: Store<BooksState>,
+    private cd: ChangeDetectorRef,) {
+    store.pipe(takeUntil(this.destroyStore$)).subscribe(state => {
+      this.booksList = state.WantToReadBooks;
+      cd.markForCheck();
+    });
   }
 
-  books$: Observable<BooksState>;
-  BooksSubscription: Subscription;
-  booksList: { book: Book, addedOn: Date }[];
-
   ngOnInit() {
-    this.BooksSubscription = this.books$
-      .pipe(
-        map(x => {
-          this.booksList = x.WantToReadBooks;
-        })
-      )
-      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroyStore$.next();
   }
 }
